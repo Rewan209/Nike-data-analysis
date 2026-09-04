@@ -1,13 +1,11 @@
 <div align="center">
 
-# 👟 NIKE GLOBAL E-COMMERCE & INVENTORY ANALYTICS
+# 👟 NIKE GLOBAL ANALYTICS
 ### *End-to-End Analytics Pipeline: From Raw Telemetry to Executive Intelligence*
 
 ![Nike Header](https://img.shields.io/badge/Brand-Nike_Inc.-black?style=for-the-badge&logo=nike)
 ![Status](https://img.shields.io/badge/Status-Completed-success?style=for-the-badge)
 ![Tech Stack](https://img.shields.io/badge/Tech-Python_%7C_SQL_%7C_Power_BI-blue?style=for-the-badge)
-
-[📊 View Power BI Report](#-dashboard-showcase) • [🛠️ Architecture](#-data-pipeline--architecture) • [💡 Key Insights](#-business-insights--impact)
 
 ---
 
@@ -15,7 +13,7 @@
 
 ## 📌 Executive Summary
 
-This project engineers an **end-to-end data pipeline** over a global dataset of **83,492 Nike ecommerce records** across 6 key international markets (US, GB, JP, IE, FI, SI). 
+This project engineers an **end-to-end data pipeline** over a global dataset of **83,492 Nike ecommerce records** across key international markets (US, GB, JP, IE, FI, SI). 
 
 By integrating multi-stage **Python** automation, robust **DBeaver SQL** cleaning, and high-impact **Power BI** visual modeling, this solution transforms raw, unstandardized retail telemetry into actionable operational insights for revenue optimization and supply chain control.
 
