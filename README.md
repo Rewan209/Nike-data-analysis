@@ -1,6 +1,6 @@
 <div align="center">
 
-# 👟 NIKE GLOBAL ANALYTICS
+# 👟 NIKE GLOBAL E-COMMERCE & INVENTORY ANALYTICS
 ### *End-to-End Analytics Pipeline: From Raw Telemetry to Executive Intelligence*
 
 ![Nike Header](https://img.shields.io/badge/Brand-Nike_Inc.-black?style=for-the-badge&logo=nike)
