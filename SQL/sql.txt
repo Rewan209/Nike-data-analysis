@@ -1,0 +1,170 @@
+ALTER TABLE global_nike RENAME COLUMN SKU TO [Stock Keeping Unit];
+
+UPDATE global_nike
+SET color_name = 'Unknown'
+WHERE color_name IS NULL
+   OR TRIM(color_name) = '';
+
+ALTER TABLE global_nike DROP COLUMN snapshot_date_new;
+
+
+UPDATE global_nike 
+SET gender_clean = CASE 
+    
+    -- 2. Exact single categories
+    WHEN gender_segment = 'MEN' THEN 'Men'
+    WHEN gender_segment = 'WOMEN' THEN 'Women'
+    
+    -- 3. Handle combinations with both Men and Women -> Unisex
+    WHEN gender_segment LIKE '%MEN%' AND gender_segment LIKE '%WOMEN%' THEN 'Unisex'
+    
+    -- 4. Handle Kids (Boys, Girls, or combinations like Women|Girls)
+    WHEN gender_segment LIKE '%BOYS%' OR gender_segment LIKE '%GIRLS%' THEN 'Kids'
+    
+    -- 5. Fallback for any other mixed or unhandled values
+    ELSE gender_segment
+END;
+
+
+UPDATE global_nike
+SET gender_clean =
+    CASE
+        -- 1. فئة الأطفال (Kids): يشمل كلمات Kids بالإنجليزية واليابانية
+        WHEN LOWER(subcategory) LIKE '%kid%' 
+          OR LOWER(subcategory) LIKE '%junior%' 
+          OR LOWER(subcategory) LIKE '%baby%'
+          OR subcategory LIKE '%キッズ%' 
+          OR subcategory LIKE '%ジュニア%' 
+          OR subcategory LIKE '%リトルキッズ%' THEN 'Kids'
+
+        -- 2. فئة النساء (Women): يشمل Women's والكلمة اليابانية ウィメンズ
+        WHEN LOWER(subcategory) LIKE '%women%' 
+          OR LOWER(subcategory) LIKE '%woman%' 
+          OR subcategory LIKE '%ウィメンズ%' THEN 'Women'
+
+        -- 3. فئة الرجال (Men): يشمل Men's والكلمة اليابانية メンズ
+        WHEN LOWER(subcategory) LIKE '%men%' 
+          OR LOWER(subcategory) LIKE '%man%' 
+          OR subcategory LIKE '%メンズ%' THEN 'Men'
+
+        -- 4. لو لم يذكر الجنس في subcategory نعتبره Unisex
+        ELSE 'Unisex'
+    END
+WHERE gender_clean IS NULL OR TRIM(gender_clean) = '';
+
+-- 1. إضافة عمود جديد بالنوع المطلوب
+ALTER TABLE global_nike ADD COLUMN discount_pct_new NUMERIC;
+
+-- 2. نسخ القيم مع تحويلها
+UPDATE global_nike SET discount_pct_new = CAST(discount_pct AS NUMERIC);
+
+UPDATE global_nike 
+SET discount_pct_new = ROUND(discount_pct_new, 1);
+
+
+
+UPDATE global_nike
+SET product_name = TRIM(product_name),
+    currency = TRIM(currency),
+    gender_segment = TRIM(gender_segment),
+    category = TRIM(category),
+    subcategory = TRIM(subcategory),
+    product_id = TRIM(product_id),
+    style_color = TRIM(style_color),
+    brand_name = TRIM(brand_name),
+    color_name = TRIM(color_name);
+
+
+UPDATE global_nike 
+SET size_conversion_id = 'N/A' 
+WHERE size_conversion_id = '' OR size_conversion_id IS NULL;
+
+
+-- تبديل القيم إذا كان سعر الخصم أكبر من السعر الأصلي
+UPDATE global_nike
+SET 
+    price_local = sale_price_local,
+    sale_price_local = price_local
+WHERE sale_price_local > price_local;
+
+
+UPDATE global_nike
+SET 
+    price_local = sale_price_local,
+    sale_price_local = price_local
+WHERE price_local > sale_price_local;
+
+
+ALTER TABLE global_nike ADD COLUMN sale NUMERIC(10,2);
+
+UPDATE global_nike
+SET sale = ROUND(price_local * (1 - discount_pct / 100.0), 2);
+
+
+ ALTER TABLE global_nike DROP COLUMN sale_price_local;
+
+
+SELECT * 
+FROM global_nike
+WHERE sale IS NULL OR TRIM(sale) = ''
+   OR price_local IS NULL OR TRIM(price_local) = ''
+   OR category IS NULL OR TRIM(category) = ''
+   OR size_label IS NULL OR TRIM(size_label) = '';
+ 
+
+SELECT  price_local FROM global_nike WHERE  price_local=0;
+
+UPDATE global_nike
+SET sport_tags = 'lifestyle'
+WHERE sport_tags IS NULL OR TRIM(sport_tags) = '';
+
+
+ALTER TABLE global_nike DROP COLUMN gender_segment;
+
+ALTER TABLE global_nike DROP COLUMN discount_pct;
+
+
+ALTER TABLE global_nike ADD COLUMN price_usd REAL;
+
+UPDATE global_nike
+SET price_usd = ROUND(
+    CASE 
+        WHEN currency = 'USD' THEN price_local
+        WHEN currency = 'GBP' THEN price_local * 1.30
+        WHEN currency = 'EUR' THEN price_local * 1.09
+        WHEN currency = 'JPY' THEN price_local * 0.0068
+        ELSE price_local
+    END, 2);
+
+
+SELECT 
+    country_code,
+    ROUND(AVG(price_usd), 2) AS avg_price_usd,
+    COUNT(*) AS total_products
+FROM global_nike
+GROUP BY country_code
+ORDER BY avg_price_usd DESC;
+
+
+-- 1. إضافة الأعمدة الجديدة في الجدول
+ALTER TABLE global_nike ADD COLUMN country_total_value REAL;
+ALTER TABLE global_nike ADD COLUMN country_total_products INTEGER;
+
+
+UPDATE global_nike
+SET 
+    country_total_value = stats.total_val,
+    country_total_products = stats.total_prods
+FROM (
+    SELECT 
+        country_code,
+        ROUND(SUM(price_usd), 2) AS total_val,
+        COUNT(*) AS total_prods
+    FROM global_nike
+    GROUP BY country_code
+) AS stats
+WHERE global_nike.country_code = stats.country_code;
+
+
+ 
+select * from global_nike ;
