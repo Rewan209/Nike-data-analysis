@@ -1,19 +1,39 @@
+<div align="center">
+
 # 👟 NIKE GLOBAL ANALYTICS
 
 ### *End-to-End Analytics Pipeline: From Raw Telemetry to Executive Intelligence*
 
+![Brand](https://img.shields.io/badge/Brand-Nike_Inc.-black?style=for-the-badge&logo=nike)
+![Status](https://img.shields.io/badge/Status-Completed-success?style=for-the-badge)
+![Tech Stack](https://img.shields.io/badge/Tech-Python_%7C_SQL_%7C_Power_BI-blue?style=for-the-badge)
+
 ---
+
+</div>
 
 ## 1. Executive Summary & Key Highlights
 
-This project engineers an end-to-end data pipeline over a global dataset of **83,492 Nike ecommerce records** across key international markets (US, GB, JP, IE, FI, SI). 
+This project engineers an **end-to-end data pipeline** over a global dataset of **83,492 Nike ecommerce records** across key international markets (US, GB, JP, IE, FI, SI). 
 
 By integrating multi-stage **Python** automation, robust **DBeaver SQL** cleaning, and high-impact **Power BI** visual modeling, this solution transforms raw, unstandardized retail telemetry into actionable operational insights for revenue optimization and supply chain control.
 
-### 🔑 Key Decision-Making Highlights
-* **Revenue Drivers**: Footwear dominates with **$4.6M** in sales, outperforming Apparel ($3.4M) and Equipment combined.
-* **Geographic Expansion**: The United States (US) leads global revenue share, followed by Western European hubs.
-* **Supply Chain Bottleneck**: **36.96% (~37%)** of active catalog sits at critical `LOW` stock thresholds, requiring immediate replenishment triggers to avoid stockouts.
+<br/>
+
+<div align="center">
+
+| 💵 Total Revenue | 🏷️ Total Discounts | 👟 Analyzed SKUs | ⚠️ Stock Warning |
+| :---: | :---: | :---: | :---: |
+| **$8.11M USD** | **$348.58K USD** | **17.89K Products** | **36.96% Low Stock** |
+
+</div>
+
+<br/>
+
+### 🎯 Key Decision-Making Highlights
+* 👟 **Footwear Dominance**: Generates **$4.6M** in sales, outperforming Apparel ($3.4M) and Equipment combined.
+* 🌍 **Geographic Driver**: The **United States (US)** leads global market revenue share, followed by Western European hubs.
+* 🚨 **Supply Chain Bottleneck**: **~37% of active catalog** sits at critical `LOW` stock thresholds, requiring immediate replenishment triggers to avoid stockouts.
 
 ---
 
@@ -21,7 +41,7 @@ By integrating multi-stage **Python** automation, robust **DBeaver SQL** cleanin
 
 This project analyzes a global Nike product feed to explore pricing, availability, product mix, and market differences across countries. The workflow moves from raw CSV through Python and SQL cleaning to interactive Power BI dashboards.
 
-### Key Objectives
+### 📌 Key Objectives
 * Compare product prices and discounts across international markets (US, GB, JP, etc.).
 * Analyze availability and stock signals by market and category.
 * Explore product mix (Footwear, Apparel, Equipment) and sub-brands (*Nike, Jordan, Converse, Kobe, ACG*).
@@ -66,29 +86,28 @@ This project analyzes a global Nike product feed to explore pricing, availabilit
 
 ## 5. Data Summary & Key Metrics
 
-* **Total Analyzed Records**: 83,492 rows
-* **Total Analyzed SKUs**: 17,890 unique products
-* **Total Revenue**: **$8.11M USD**
-* **Total Discounts Given**: **$348.58K USD**
-* **Stock Warning Ratio**: **36.96% Low Stock**
-* **Observed Markets**: US, GB, JP, IE, FI, SI
+* **📊 Total Analyzed Records**: 83,492 rows
+* **🏷️ Total Analyzed SKUs**: 17,890 unique products
+* **💰 Total Revenue**: **$8.11M USD**
+* **📉 Total Discounts Given**: **$348.58K USD**
+* **⚠️ Stock Warning Ratio**: **36.96% Low Stock**
+* **🌐 Observed Markets**: US, GB, JP, IE, FI, SI
 
 ---
 
 ## 6. Cleaning & Data Quality Notes (Challenges Handled)
 
-* **Multi-Currency Normalization**: Converted local currencies (EUR, GBP, JPY) to a unified USD value using standard exchange rates.
-* **Foreign Language Translation**: Processed Japanese and French product names/tags using Python NLP translation routines.
-* **Demographic Standardization**: Cleaned overlapping gender fields (`Men`, `Men's Lifestyle`, `Unisex`) into `gender_clean`.
-* **Subcategory Mapping**: Re-mapped non-standardized subcategory text into structured `clean_subcategory` tiers.
-* **Deduplication**: Handled duplicate snapshots using `product_id` and `sku` constraints in SQL.
+* 💱 **Multi-Currency Normalization**: Converted local currencies (EUR, GBP, JPY) to a unified USD value using standard exchange rates.
+* 🌐 **Foreign Language Translation**: Processed Japanese and French product names/tags using Python NLP translation routines.
+* 👥 **Demographic Standardization**: Cleaned overlapping gender fields (`Men`, `Men's Lifestyle`, `Unisex`) into `gender_clean`.
+* 📂 **Subcategory Mapping**: Re-mapped non-standardized subcategory text into structured `clean_subcategory` tiers.
+* 🧹 **Deduplication**: Handled duplicate snapshots using `product_id` and `sku` constraints in SQL.
 
 ---
 
 ## 7. Business Questions & Insights To Explore
 
-1. **Discount Elasticity**: Does a higher `discount_pct` increase sell-through rate, or are premium lines (like *Jordan*) discount-resistant?
-2. **Regional Price Variance**: What is the price delta for identical `product_id` items across US vs. European vs. Asian markets?
-3. **Stockout Risk Mapping**: Which subcategories have the highest proportion of `LOW` and `OOS` items?
-4. **Brand Portfolio Split**: How does inventory distribution compare between core *Nike* lines and sub-brands (*Converse*, *ACG*, *Kobe*)?
-
+1. 🏷️ **Discount Elasticity**: Does a higher `discount_pct` increase sell-through rate, or are premium lines (like *Jordan*) discount-resistant?
+2. 🌐 **Regional Price Variance**: What is the price delta for identical `product_id` items across US vs. European vs. Asian markets?
+3. 📦 **Stockout Risk Mapping**: Which subcategories have the highest proportion of `LOW` and `OOS` items?
+4. 👟 **Brand Portfolio Split**: How does inventory distribution compare between core *Nike* lines and sub-brands (*Converse*, *ACG*, *Kobe*)?
