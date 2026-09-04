@@ -107,7 +107,7 @@ This project analyzes a global Nike product feed to explore pricing, availabilit
 
 ## 7. Business Questions & Insights To Explore
 
-1. 🏷️ **Discount Elasticity**: Does a higher `discount_pct` increase sell-through rate, or are premium lines (like *Jordan*) discount-resistant?
-2. 🌐 **Regional Price Variance**: What is the price delta for identical `product_id` items across US vs. European vs. Asian markets?
-3. 📦 **Stockout Risk Mapping**: Which subcategories have the highest proportion of `LOW` and `OOS` items?
-4. 👟 **Brand Portfolio Split**: How does inventory distribution compare between core *Nike* lines and sub-brands (*Converse*, *ACG*, *Kobe*)?
+1.  **Discount Elasticity**: Does a higher `discount_pct` increase sell-through rate, or are premium lines (like *Jordan*) discount-resistant?
+2.  **Regional Price Variance**: What is the price delta for identical `product_id` items across US vs. European vs. Asian markets?
+3.  **Stockout Risk Mapping**: Which subcategories have the highest proportion of `LOW` and `OOS` items?
+4.  **Brand Portfolio Split**: How does inventory distribution compare between core *Nike* lines and sub-brands (*Converse*, *ACG*, *Kobe*)?
