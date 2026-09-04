@@ -92,12 +92,3 @@ This project analyzes a global Nike product feed to explore pricing, availabilit
 3. **Stockout Risk Mapping**: Which subcategories have the highest proportion of `LOW` and `OOS` items?
 4. **Brand Portfolio Split**: How does inventory distribution compare between core *Nike* lines and sub-brands (*Converse*, *ACG*, *Kobe*)?
 
----
-
-## 8. Data Architecture & Pipeline
-
-```text
-┌────────────────┐     ┌──────────────────────┐     ┌─────────────────┐     ┌───────────────────┐
-│  RAW DATASET   │ ──> │ Python Transformation│ ──> │ SQL Validation  │ ──> │ Interactive BI    │
-│  (83k+ Rows)   │     │ (Clean, Translate)   │     │ (DBeaver Script)│     │ (Power BI Engine) │
-└────────────────┘     └──────────────────────┘     └─────────────────┘     └───────────────────┘
