@@ -31,9 +31,9 @@ By integrating multi-stage **Python** automation, robust **DBeaver SQL** cleanin
 <br/>
 
 ### 🎯 Key Decision-Making Highlights
-* 👟 **Footwear Dominance**: Generates **$4.6M** in sales, outperforming Apparel ($3.4M) and Equipment combined.
-* 🌍 **Geographic Driver**: The **United States (US)** leads global market revenue share, followed by Western European hubs.
-* 🚨 **Supply Chain Bottleneck**: **~37% of active catalog** sits at critical `LOW` stock thresholds, requiring immediate replenishment triggers to avoid stockouts.
+*  **Footwear Dominance**: Generates **$4.6M** in sales, outperforming Apparel ($3.4M) and Equipment combined.
+*  **Geographic Driver**: The **United States (US)** leads global market revenue share, followed by Western European hubs.
+*  **Supply Chain Bottleneck**: **~37% of active catalog** sits at critical `LOW` stock thresholds, requiring immediate replenishment triggers to avoid stockouts.
 
 ---
 
@@ -86,22 +86,22 @@ This project analyzes a global Nike product feed to explore pricing, availabilit
 
 ## 5. Data Summary & Key Metrics
 
-* **📊 Total Analyzed Records**: 83,492 rows
-* **🏷️ Total Analyzed SKUs**: 17,890 unique products
-* **💰 Total Revenue**: **$8.11M USD**
-* **📉 Total Discounts Given**: **$348.58K USD**
-* **⚠️ Stock Warning Ratio**: **36.96% Low Stock**
-* **🌐 Observed Markets**: US, GB, JP, IE, FI, SI
+* **Total Analyzed Records**: 83,492 rows
+* **Total Analyzed SKUs**: 17,890 unique products
+* **Total Revenue**: **$8.11M USD**
+* **Total Discounts Given**: **$348.58K USD**
+* **Stock Warning Ratio**: **36.96% Low Stock**
+* **Observed Markets**: US, GB, JP, IE, FI, SI
 
 ---
 
 ## 6. Cleaning & Data Quality Notes (Challenges Handled)
 
-* 💱 **Multi-Currency Normalization**: Converted local currencies (EUR, GBP, JPY) to a unified USD value using standard exchange rates.
-* 🌐 **Foreign Language Translation**: Processed Japanese and French product names/tags using Python NLP translation routines.
-* 👥 **Demographic Standardization**: Cleaned overlapping gender fields (`Men`, `Men's Lifestyle`, `Unisex`) into `gender_clean`.
-* 📂 **Subcategory Mapping**: Re-mapped non-standardized subcategory text into structured `clean_subcategory` tiers.
-* 🧹 **Deduplication**: Handled duplicate snapshots using `product_id` and `sku` constraints in SQL.
+*  **Multi-Currency Normalization**: Converted local currencies (EUR, GBP, JPY) to a unified USD value using standard exchange rates.
+*  **Foreign Language Translation**: Processed Japanese and French product names/tags using Python NLP translation routines.
+*  **Demographic Standardization**: Cleaned overlapping gender fields (`Men`, `Men's Lifestyle`, `Unisex`) into `gender_clean`.
+*  **Subcategory Mapping**: Re-mapped non-standardized subcategory text into structured `clean_subcategory` tiers.
+*  **Deduplication**: Handled duplicate snapshots using `product_id` and `sku` constraints in SQL.
 
 ---
 
