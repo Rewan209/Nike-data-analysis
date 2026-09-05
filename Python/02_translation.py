@@ -16,25 +16,6 @@ df["product_name_eng"] = df["product_name"]
 df["subcategory_en"] = df["subcategory"]
 df["color_name_en"] = df["color_name"]
 
-#!pip install deep_translator
-#from deep_translator import GoogleTranslator
-
-#creating translating function
-#translator = GoogleTranslator(source='ja', target='en')
-#def translate_text(text):
- #   if pd.isna(text):
-  #      return text
-
-   # try:
-    #    return translator.translate(str(text))
-    #except:
-     #   return text
-
-#product_translations = {}
-
-#for text in df["product_name"].dropna().unique():
- #   if any('\u3040' <= char <= '\u30ff' or '\u4e00' <= char <= '\u9fff' for char in str(text)):
-  #      product_translations[text] = translate_text(text)
 
 !pip install -q transformers sentencepiece torch tqdm
 
@@ -96,10 +77,8 @@ def translate_batch(texts, batch_size=32):
 
     return results
 
-# Get unique product names
 product_values = df["product_name"].dropna().astype(str).unique()
 
-# Keep only values containing Japanese
 japanese_products = [
     x for x in product_values
     if contains_japanese(x)
