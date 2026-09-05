@@ -29,7 +29,7 @@ END;
 UPDATE global_nike
 SET gender_clean =
     CASE
-        -- 1. فئة الأطفال (Kids): يشمل كلمات Kids بالإنجليزية واليابانية
+
         WHEN LOWER(subcategory) LIKE '%kid%' 
           OR LOWER(subcategory) LIKE '%junior%' 
           OR LOWER(subcategory) LIKE '%baby%'
@@ -37,25 +37,20 @@ SET gender_clean =
           OR subcategory LIKE '%ジュニア%' 
           OR subcategory LIKE '%リトルキッズ%' THEN 'Kids'
 
-        -- 2. فئة النساء (Women): يشمل Women's والكلمة اليابانية ウィメンズ
         WHEN LOWER(subcategory) LIKE '%women%' 
           OR LOWER(subcategory) LIKE '%woman%' 
           OR subcategory LIKE '%ウィメンズ%' THEN 'Women'
 
-        -- 3. فئة الرجال (Men): يشمل Men's والكلمة اليابانية メンズ
         WHEN LOWER(subcategory) LIKE '%men%' 
           OR LOWER(subcategory) LIKE '%man%' 
           OR subcategory LIKE '%メンズ%' THEN 'Men'
 
-        -- 4. لو لم يذكر الجنس في subcategory نعتبره Unisex
         ELSE 'Unisex'
     END
 WHERE gender_clean IS NULL OR TRIM(gender_clean) = '';
 
--- 1. إضافة عمود جديد بالنوع المطلوب
 ALTER TABLE global_nike ADD COLUMN discount_pct_new NUMERIC;
 
--- 2. نسخ القيم مع تحويلها
 UPDATE global_nike SET discount_pct_new = CAST(discount_pct AS NUMERIC);
 
 UPDATE global_nike 
@@ -80,7 +75,6 @@ SET size_conversion_id = 'N/A'
 WHERE size_conversion_id = '' OR size_conversion_id IS NULL;
 
 
--- تبديل القيم إذا كان سعر الخصم أكبر من السعر الأصلي
 UPDATE global_nike
 SET 
     price_local = sale_price_local,
@@ -146,7 +140,6 @@ GROUP BY country_code
 ORDER BY avg_price_usd DESC;
 
 
--- 1. إضافة الأعمدة الجديدة في الجدول
 ALTER TABLE global_nike ADD COLUMN country_total_value REAL;
 ALTER TABLE global_nike ADD COLUMN country_total_products INTEGER;
 
