@@ -20,13 +20,13 @@ exchange_rates = {
 
 df['sale_usd'] = df['sale'] * df['currency'].map(exchange_rates)
 
-#columns_to_drop = ['subcategory','product_name','product_name_eng','color_name']
-#df = df.drop(columns=columns_to_drop)
+columns_to_drop = ['subcategory','product_name','product_name_eng','color_name']
+df = df.drop(columns=columns_to_drop)
 print("DataFrame shape after dropping columns:", df.shape)
 df.head()
 
-#columns_to_drop = ['sales']
-#df = df.drop(columns=columns_to_drop)
+columns_to_drop = ['sales']
+df = df.drop(columns=columns_to_drop)
 print("DataFrame shape after dropping columns:", df.shape)
 df.head()
 
@@ -36,29 +36,24 @@ def get_product_type(text):
 
     text = str(text).lower()
 
-    # SHOES
     if any(word in text for word in ["shoe","shoes","sneaker","sneakers","trainer","trainers","boot","boots",
         "slides","sandal","sandals"]):
         return "Shoes"
 
-    # CLOTHING
     elif any(word in text for word in ["shirt","t-shirt","tee","top","hoodie","jacket","pants","shorts",
         "leggings","bra","dress","jersey","sweatshirt","coat","skirt","tank"
     ]):
         return "Clothing"
 
-    # ACCESSORIES
     elif any(word in text for word in ["bag","backpack","cap","hat","socks","watch","wallet"
     ]):
         return "Accessories"
 
-    # EQUIPMENT
     elif any(word in text for word in [
         "ball","equipment"
     ]):
         return "Equipment"
 
-    # GOLF
     elif any(
         word in text
         for word in ["golf","polo","cleat","cleats","tour","dry-fit golf","tiger woods","jordan golf",
@@ -66,14 +61,12 @@ def get_product_type(text):
     ):
         return "Golf"
 
-    # SKATEBOARDING
     elif any(
         word in text
         for word in ["skate", "skateboarding", "sb", "janoski", "nyjah", "ishod"]
     ):
         return "Skateboarding"
 
-    # FOOTBALL
     elif any(
         word in text
         for word in ["football","soccer", "mercurial","phantom","tiempo","superfly","f.c.","fc","jersey",
@@ -82,7 +75,6 @@ def get_product_type(text):
     ):
         return "Football"
 
-    # RUNNING
     elif any(
         word in text
         for word in ["run","running","runner","pegasus","vaporfly","alphafly","invincible","vomero",
@@ -91,7 +83,6 @@ def get_product_type(text):
     ):
         return "Running"
 
-    # TRAINING
     elif any(
         word in text
         for word in ["train","training","trainer","gym","workout","metcon","fitness","cross training",
@@ -100,7 +91,6 @@ def get_product_type(text):
     ):
         return "Training"
 
-    # LIFESTYLE
     elif any(
         word in text
         for word in ["lifestyle","casual","streetwear","force","air max","dunk","blazer","jordan","sportswear",
@@ -109,7 +99,6 @@ def get_product_type(text):
     ):
         return "Lifestyle"
 
-    # EVERYTHING ELSE
     else:
         return "Other"
 
@@ -121,7 +110,6 @@ def create_clean_subcategory(row):
     gender_clean = str(row["gender_clean"]).strip().lower()
     product_type = row["product_type"]
 
-    # Standardize gender labels
     if gender_clean in ["male", "men", "mens", "men's"]:
         gender_label = "Men's"
 
